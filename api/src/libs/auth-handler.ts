@@ -12,9 +12,11 @@ export default {
   },
 
   onAuth: ({ userDid, userPk, claims, updateSession }: any) => {
+    // @ts-ignore
     const claim = claims.find((x) => x.type === 'profile');
     updateSession({
       result: {
+        // @ts-ignore
         ...omit(claim, ['type', 'signature']),
         did: userDid,
         pk: userPk,

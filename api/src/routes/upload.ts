@@ -1,4 +1,5 @@
 import express from 'express';
+// @ts-ignore
 import multer from 'multer';
 import path from 'path';
 
@@ -10,10 +11,13 @@ const router = express.Router();
 const upload = multer({ dest: 'public/uploads/' });
 
 router.post('/', upload.single('file'), async (req, res) => {
+  // @ts-ignore
   if (!req.file) {
-    return res.status(400).json({ success: false, error: 'No file uploaded' });
+    res.status(400).json({ success: false, error: 'No file uploaded' });
+    return;
   }
 
+  // @ts-ignore
   const { filename, path: tempPath } = req.file;
   const targetPath = path.join('public', 'uploads', filename);
 
